@@ -594,6 +594,7 @@ export default {
                 ? this.formatDateToString(userDate, this.format)
                 : userText
             );
+            this.$emit('change', userDate ? userDate : userText);
 
         },
 
@@ -740,7 +741,7 @@ export default {
         clear() {
 
             this.$emit('input', '');
-
+            this.$emit('change', '');
         },
 
         selectDateItem(item) {
@@ -756,6 +757,7 @@ export default {
                 }
 
                 this.$emit('input', this.formatDateToString(newDate, this.format));
+                this.$emit('change', newDate);
 
                 if (this.hasInputElement && !this.pickTime) {
                     this.close();
@@ -775,6 +777,7 @@ export default {
             );
 
             this.$emit('input', this.formatDateToString(currentDate, this.format));
+            this.$emit('change', currentDate);
         },
 
         inputHours(event) {
@@ -792,7 +795,7 @@ export default {
             );
             event.target.value = paddNum(numValue, 1);
             this.$emit('input', this.formatDateToString(currentDate, this.format));
-
+            this.$emit('change', currentDate);
         },
 
         inputTime(method, event) {
@@ -805,7 +808,7 @@ export default {
             currentDate[method](numValue);
 
             this.$emit('input', this.formatDateToString(currentDate, this.format));
-
+            this.$emit('change', currentDate);
         },
 
         onTimeInputFocus(event) {
